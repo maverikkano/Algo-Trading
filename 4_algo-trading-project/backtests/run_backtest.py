@@ -3,7 +3,9 @@ import backtrader as bt
 from utils.fetch_data import fetch_data
 from strategies.rsi_ema_strategy import RSIEMAStrategy
 from strategies.rsi_ema_v2 import Rsi_ema_v2
+from strategies.rsi_ema_v3 import Rsi_ema_v3
 from strategies.rsi_ema_intraday import Rsi_ema_intraday
+
 import pandas as pd
 
 def run_backtest(symbol="AAPL", start="2022-01-01", end="2023-01-01", interval="1d"):
@@ -16,7 +18,7 @@ def run_backtest(symbol="AAPL", start="2022-01-01", end="2023-01-01", interval="
     cerebro = bt.Cerebro()
     cerebro.adddata(data_bt)
     # cerebro.addstrategy(RSIEMAStrategy)
-    cerebro.addstrategy(Rsi_ema_v2)
+    cerebro.addstrategy(Rsi_ema_v3)
     # cerebro.addstrategy(Rsi_ema_intraday)
 
     cerebro.broker.set_cash(100000)
