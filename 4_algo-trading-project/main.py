@@ -10,7 +10,7 @@ def main():
     
     args = parser.parse_args()
 
-    run_backtest(symbol=args.symbol, start=args.start, end=args.end, interval=args.interval)
+    run_backtest(symbol=args.symbol, start=args.start, end=args.end, interval=args.interval, strategy="Rsi_ema_v2")
 
 if __name__ == "__main__":
     main()
