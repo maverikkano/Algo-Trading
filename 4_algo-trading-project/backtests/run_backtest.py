@@ -32,22 +32,4 @@ def run_backtest(strategy="", symbol="AAPL", start="2022-01-01", end="2023-01-01
     profit_percent = (portfolio_final-portfolio_initial)/portfolio_initial*100
     print(f"Profit% : {profit_percent:.2f}%")
 
-    # Analytics
-
-    # Access trades
-    strat = results[0]  # Get the strategy instance
-    trade_log = pd.DataFrame(strat.trades)
-
-    if(trade_log.size == 0):
-        return
-
-    print("Total Trades:", len(trade_log))
-    print("Total Profit:", trade_log['Profit'].sum())
-    print("Average Profit per Trade:", trade_log['Profit'].mean())
-
-    # Show the trade report
-    print(trade_log)
-
-    return cerebro
-
-    # cerebro.plot(style='candlestick')
+    return cerebro, results, profit_percent
