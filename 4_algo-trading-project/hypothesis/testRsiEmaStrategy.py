@@ -1,14 +1,14 @@
 # 01-May-2025 00:00
 
 from backtests.run_backtest import run_backtest
-from strategies.rsi_ema_v2 import Rsi_ema_v2
+from strategies.rsiEmaStrategy import rsiEmaStrategy
 from utils.savePlot import save_backtest_plot
 from utils.extractTrades import extractTrades
 import os
 
 plot_info = {
-    "strategy": Rsi_ema_v2,
-    "symbol": "AAPL",
+    "strategy": rsiEmaStrategy,
+    "symbol": "TSLA",
     "start_date": "2020-01-01",
     "end_date": "2025-01-01",
     "profit%": 0,

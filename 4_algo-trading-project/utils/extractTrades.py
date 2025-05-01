@@ -11,8 +11,6 @@ def extractTrades(results):
         return
 
     print("Total Trades:", len(trade_log))
-    print("Total Profit:", trade_log['Profit'].sum())
-    print("Average Profit per Trade:", trade_log['Profit'].mean())
 
     # Show the trade report
     print(trade_log)

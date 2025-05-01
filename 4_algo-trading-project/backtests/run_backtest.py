@@ -1,9 +1,7 @@
 import backtrader as bt
 from utils.fetch_data import fetch_data
-from strategies.rsi_ema_strategy import RSIEMAStrategy
-from strategies.rsi_ema_v2 import Rsi_ema_v2
-from strategies.rsi_ema_v3 import Rsi_ema_v3
-from strategies.rsi_ema_intraday import Rsi_ema_intraday
+from strategies.rsiEmaStrategy import rsiEmaStrategy
+from strategies.rsiEmaIntradayStrategy import rsiEmaIntradayStrategy
 from strategies.ROCMomentumStrategy import ROCMomentumStrategy
 
 import pandas as pd

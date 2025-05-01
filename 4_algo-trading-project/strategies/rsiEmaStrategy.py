@@ -1,7 +1,7 @@
 from utils.log_trade import log_trade
 import backtrader as bt
 
-class Rsi_ema_v3(bt.Strategy):
+class rsiEmaStrategy(bt.Strategy):
     params = (
         ("rsi_period", 14),
         ("ema_period", 7),
@@ -20,24 +20,24 @@ class Rsi_ema_v3(bt.Strategy):
 
 
     def next(self):
-        # Skip bars until indicators are ready
-        if len(self) < self.params.rsi_period + 7:   # say 14 for RSI + a few more for safety
+        warmup = max(self.params.rsi_period, self.params.ema_period)
+        if len(self) < warmup:
             return
         
         if self.position.size == 0:
-            if self.rsi[0] > 60:
+            if self.rsi[0] > 70 or self.data.close[0] < self.ema[0]:
                 self.buy_price = self.data.close[0]
                 self.buy_date = self.data.datetime.date(0)
                 self.order = self.buy()
         else:
-            if self.rsi[0] < 40 and self.data.close[0] > self.ema[0]:
+            if self.rsi[0] < 30 and self.data.close[0] > self.ema[0]:
                 sell_price = self.data.close[0]
                 sell_date = self.data.datetime.date(0)
                 self.order = self.sell()
 
                 # Record trade info
-                profit = sell_price - self.buy_price
-                log_trade(self.trades, self.buy_date, self.buy_price, sell_date, sell_price, profit)
+                profit_percent = (sell_price - self.buy_price) / self.buy_price * 100
+                log_trade(self.trades, self.buy_date, self.buy_price, sell_date, sell_price, profit_percent)
 
     def stop(self):
         # At the end, if any position is still open, just report it

@@ -1,7 +1,7 @@
 from utils.log_trade import log_trade
 import backtrader as bt
 
-class Rsi_ema_intraday(bt.Strategy):
+class rsiEmaIntradayStrategy(bt.Strategy):
     # Set strategy parameters (customize for intraday trading)
     params = (
         ("rsi_period", 14),        # RSI period, typically 14 for intraday
