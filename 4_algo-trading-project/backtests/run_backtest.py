@@ -23,11 +23,17 @@ def run_backtest(strategy="", symbol="AAPL", start="2022-01-01", end="2023-01-01
 
     portfolio_initial = cerebro.broker.getvalue()
     print(f"Starting Portfolio Value: ${portfolio_initial:,.2f}")
+
+    cerebro.addanalyzer(bt.analyzers.DrawDown, _name='drawdown')
+
     results = cerebro.run()
     portfolio_final = cerebro.broker.getvalue()
     print(f"Final Portfolio Value: ${portfolio_final:,.2f}")
+
+    drawdown = results[0].analyzers.drawdown.get_analysis()
+    print(f"Max Drawdown: {drawdown['max']['drawdown']:.2f}%")
     
     profit_percent = (portfolio_final-portfolio_initial)/portfolio_initial*100
     print(f"Profit% : {profit_percent:.2f}%")
 
-    return cerebro, results, profit_percent
+    return cerebro, results, profit_percent, drawdown
